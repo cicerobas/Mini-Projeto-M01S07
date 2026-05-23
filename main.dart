@@ -1,10 +1,13 @@
 import 'db.dart';
+import 'report.dart';
 import 'task.dart';
 
 final db = DB();
 
 void main() {
-  List<Task> taskList = db.taskData.map((e) => Task.fromMap(e)).toList();
+  final report = Report(
+    taskList: db.taskData.map((taskMap) => Task.fromMap(taskMap)).toList(),
+  );
 
-  taskList.forEach(print);
+  report.showAllTasks();
 }
