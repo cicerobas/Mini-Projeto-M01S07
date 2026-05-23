@@ -81,7 +81,7 @@ class Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, assignee: $assignee, status: $status, priority: $priority, value: $value, hours: $hours)';
+    return "${'=' * 50}\nID: $id\nTítulo: $title\nResposável: $assignee\nStatus: $status\nPrioridade: $priority\nValor: R\$ $value\nHoras: $hours";
   }
 }
 
