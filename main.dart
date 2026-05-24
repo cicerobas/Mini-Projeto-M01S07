@@ -9,5 +9,6 @@ void main() {
     taskList: db.taskData.map((taskMap) => Task.fromMap(taskMap)).toList(),
   );
 
-  report.showAllTasks();
+  //report.showAllTasks();
+  report.showTasksByStatus();
 }
