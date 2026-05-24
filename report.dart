@@ -6,6 +6,7 @@ class Report {
   List<Task> taskList;
   Report({required this.taskList});
 
+  // Cria um Map separando a lista por cada status
   MapTaskByStaus _getTasksByStatus() {
     MapTaskByStaus map = {
       "completed": [],
@@ -43,6 +44,7 @@ class Report {
     return total / pendingTasks.length;
   }
 
+  // Utiliza o Map filtrado por status para somar as horas
   Map<String, int> _getTotalHoursByStatus(MapTaskByStaus tasks) {
     return {
       "concluida": tasks["completed"]!.fold(
@@ -92,6 +94,7 @@ class Report {
   }
 
   void showTasksWithMissingFields() {
+    // Usa whereType() na lista para filtrar e fazer o cast pelo tipo
     final incompleteTasks = taskList.whereType<IncompleteTask>().toList();
 
     print("\nTarefas com dados incompletos:");
@@ -127,6 +130,7 @@ class Report {
     print(
       "\nValor total das concluídas: R\$ ${_getCompletedTasksValue(completedTasks ?? [])}",
     );
+
     final pendingTasks = filteredTasks['pending'];
     print(
       (pendingTasks ?? []).isEmpty

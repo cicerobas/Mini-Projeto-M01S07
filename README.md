@@ -37,4 +37,6 @@ Execute o arquivo `main.dart` no ambiente utilizado em aula.
 
 Exemplo:
 ```bash
+git clone https://github.com/cicerobas/Mini-Projeto-M01S07.git
+cd Mini-Projeto-M01S07/
 dart run main.dart

@@ -17,11 +17,13 @@ class Task {
     required this.hours,
   });
 
+  // Recebe um Map, trata os dados e retorna Task ou IncompleteTask
   factory Task.fromMap(Map<String, dynamic> map) {
     List<String> missingFields = [];
 
+    // Verifica campos ausentes nos dados
     map.forEach((key, value) {
-      if (value == null) {
+      if (value == null || value == '') {
         missingFields.add(key);
       }
     });
@@ -64,7 +66,7 @@ class Task {
         priority: priority,
         value: value,
         hours: hours,
-        missingFields: missingFields,
+        missingFields: missingFields, // Lista com os campos ausentes
       );
     }
 
