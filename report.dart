@@ -4,8 +4,8 @@ class Report {
   List<Task> taskList;
   Report({required this.taskList});
 
-  Map<String, List<String>> _getTasksByStatus() {
-    Map<String, List<String>> map = {
+  Map<String, List<Task>> _getTasksByStatus() {
+    Map<String, List<Task>> map = {
       "completed": [],
       "ongoing": [],
       "pending": [],
@@ -15,16 +15,16 @@ class Report {
     for (var task in taskList) {
       switch (task.status) {
         case "concluida":
-          map["completed"]!.add(task.title);
+          map["completed"]!.add(task);
           break;
         case "em andamento":
-          map["ongoing"]!.add(task.title);
+          map["ongoing"]!.add(task);
           break;
         case "pendente":
-          map["pending"]!.add(task.title);
+          map["pending"]!.add(task);
           break;
         case "cancelada":
-          map["canceled"]!.add(task.title);
+          map["canceled"]!.add(task);
           break;
       }
     }
@@ -36,7 +36,7 @@ class Report {
   void showAllTasks() => taskList.forEach(print);
 
   void showTasksByStatus() {
-    _getTasksByStatus().forEach((key, value) {
+    _getTasksByStatus().forEach((key, tasks) {
       print(switch (key) {
         "completed" => "\nTarefas concluídas:",
         "ongoing" => "\nTarefas em andamento:",
@@ -44,7 +44,7 @@ class Report {
         "canceled" => "\nTarefas canceladas:",
         _ => "",
       });
-      value.forEach((e) => print(" - $e"));
+      tasks.forEach((task) => print(" - ${task.title}"));
     });
   }
 
