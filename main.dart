@@ -12,5 +12,6 @@ void main() {
   //report.showAllTasks();
   // report.showTasksByStatus();
   // report.showAllStatus();
-  report.showTotalHoursByStatus();
+  // report.showTotalHoursByStatus();
+  report.showTasksWithMissingFields();
 }

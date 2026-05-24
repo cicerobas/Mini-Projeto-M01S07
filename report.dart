@@ -90,4 +90,17 @@ class Report {
       print(" - $key: $value horas");
     });
   }
+
+  void showTasksWithMissingFields() {
+    final incompleteTasks = taskList.whereType<IncompleteTask>().toList();
+
+    print("Tarefas com dados incompletos:");
+    for (var task in incompleteTasks) {
+      task.missingFields = task.missingFields
+          .map((e) => "$e faltando")
+          .toList();
+
+      print(" - ID ${task.id}: ${task.missingFields.join(" ou ")}");
+    }
+  }
 }
