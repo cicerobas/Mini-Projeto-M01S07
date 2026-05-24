@@ -1,11 +1,13 @@
 import 'task.dart';
 
+typedef MapTaskByStaus = Map<String, List<Task>>;
+
 class Report {
   List<Task> taskList;
   Report({required this.taskList});
 
-  Map<String, List<Task>> _getTasksByStatus() {
-    Map<String, List<Task>> map = {
+  MapTaskByStaus _getTasksByStatus() {
+    MapTaskByStaus map = {
       "completed": [],
       "ongoing": [],
       "pending": [],
@@ -41,6 +43,27 @@ class Report {
     return total / pendingTasks.length;
   }
 
+  Map<String, int> _getTotalHoursByStatus(MapTaskByStaus tasks) {
+    return {
+      "concluida": tasks["completed"]!.fold(
+        0,
+        (value, task) => value + task.hours,
+      ),
+      "em andamento": tasks["ongoing"]!.fold(
+        0,
+        (value, task) => value + task.hours,
+      ),
+      "pendente": tasks["pending"]!.fold(
+        0,
+        (value, task) => value + task.hours,
+      ),
+      "cancelada": tasks["canceled"]!.fold(
+        0,
+        (value, task) => value + task.hours,
+      ),
+    };
+  }
+
   void showAllTasks() => taskList.forEach(print);
 
   void showTasksByStatus() {
@@ -59,5 +82,12 @@ class Report {
   void showAllStatus() {
     print("Status encontrados:");
     _getStatusSet().forEach((status) => print(" - $status"));
+  }
+
+  void showTotalHoursByStatus() {
+    print("Horas por status:");
+    _getTotalHoursByStatus(_getTasksByStatus()).forEach((key, value) {
+      print(" - $key: $value horas");
+    });
   }
 }
