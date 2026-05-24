@@ -36,6 +36,11 @@ class Report {
   double _getCompletedTasksValue(List<Task> completedTasks) =>
       completedTasks.fold(0, (value, task) => value + task.value);
 
+  double _getPendingTasksAverageValue(List<Task> pendingTasks) {
+    double total = pendingTasks.fold(0, (value, task) => value + task.value);
+    return total / pendingTasks.length;
+  }
+
   void showAllTasks() => taskList.forEach(print);
 
   void showTasksByStatus() {
