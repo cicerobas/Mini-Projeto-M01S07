@@ -10,5 +10,6 @@ void main() {
   );
 
   //report.showAllTasks();
-  report.showTasksByStatus();
+  // report.showTasksByStatus();
+  report.showAllStatus();
 }

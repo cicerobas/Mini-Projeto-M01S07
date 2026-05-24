@@ -31,6 +31,8 @@ class Report {
     return map;
   }
 
+  Set<String> _getStatusSet() => taskList.map((task) => task.status).toSet();
+
   void showAllTasks() => taskList.forEach(print);
 
   void showTasksByStatus() {
@@ -44,5 +46,10 @@ class Report {
       });
       value.forEach((e) => print(" - $e"));
     });
+  }
+
+  void showAllStatus() {
+    print("Status encontrados:");
+    _getStatusSet().forEach((status) => print(" - $status"));
   }
 }
