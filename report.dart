@@ -33,6 +33,9 @@ class Report {
 
   Set<String> _getStatusSet() => taskList.map((task) => task.status).toSet();
 
+  double _getCompletedTasksValue(List<Task> completedTasks) =>
+      completedTasks.fold(0, (value, task) => value + task.value);
+
   void showAllTasks() => taskList.forEach(print);
 
   void showTasksByStatus() {
