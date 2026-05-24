@@ -75,17 +75,17 @@ class Report {
         "canceled" => "\nTarefas canceladas:",
         _ => "",
       });
-      tasks.forEach((task) => print(" - ${task.title}"));
+      tasks.forEach((task) => print(" - ID ${task.id}: ${task.title}"));
     });
   }
 
   void showAllStatus() {
-    print("Status encontrados:");
+    print("\nStatus encontrados:");
     _getStatusSet().forEach((status) => print(" - $status"));
   }
 
   void showTotalHoursByStatus() {
-    print("Horas por status:");
+    print("\nHoras por status:");
     _getTotalHoursByStatus(_getTasksByStatus()).forEach((key, value) {
       print(" - $key: $value horas");
     });
@@ -94,7 +94,7 @@ class Report {
   void showTasksWithMissingFields() {
     final incompleteTasks = taskList.whereType<IncompleteTask>().toList();
 
-    print("Tarefas com dados incompletos:");
+    print("\nTarefas com dados incompletos:");
     for (var task in incompleteTasks) {
       task.missingFields = task.missingFields
           .map((e) => "$e faltando")
@@ -102,5 +102,40 @@ class Report {
 
       print(" - ID ${task.id}: ${task.missingFields.join(" ou ")}");
     }
+  }
+
+  void showCompleteReport() {
+    final filteredTasks = _getTasksByStatus();
+
+    print("${' ' * 12}RELATÓRIO FINAL DE TAREFAS${' ' * 12}");
+    print("${'#' * 17} LISTA COMPLETA ${'#' * 17}");
+    showAllTasks();
+
+    print("\n${'#' * 14} FILTRADAS POR STATUS ${'#' * 14}");
+    showTasksByStatus();
+
+    print("\n${'#' * 20} DETALHES ${'#' * 20}");
+    print("\nTotal de tarefas analisadas: ${taskList.length}");
+    print("Tarefas concluídas: ${filteredTasks['completed']?.length ?? 0}");
+    print("Tarefas pendentes: ${filteredTasks['pending']?.length ?? 0}");
+    print("Tarefas em andamento: ${filteredTasks['ongoing']?.length ?? 0}");
+    print("Tarefas canceladas: ${filteredTasks['canceled']?.length ?? 0}");
+
+    showAllStatus();
+
+    final completedTasks = filteredTasks['completed'];
+    print(
+      "\nValor total das concluídas: R\$ ${_getCompletedTasksValue(completedTasks ?? [])}",
+    );
+    final pendingTasks = filteredTasks['pending'];
+    print(
+      (pendingTasks ?? []).isEmpty
+          ? "Não existem tarefas pendentes para calcular média."
+          : "Média de valor das pendentes: R\$ ${_getPendingTasksAverageValue(pendingTasks ?? [])}",
+    );
+
+    showTotalHoursByStatus();
+
+    showTasksWithMissingFields();
   }
 }
