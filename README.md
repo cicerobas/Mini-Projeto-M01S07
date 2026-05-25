@@ -40,3 +40,7 @@ Exemplo:
 git clone https://github.com/cicerobas/Mini-Projeto-M01S07.git
 cd Mini-Projeto-M01S07/
 dart run main.dart
+```
+## Links
+Trello: https://trello.com/b/Yj7zlfuO/projeto-sctec  
+Video: https://youtu.be/3A6815fMvr0
